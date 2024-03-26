@@ -9,7 +9,7 @@
   $emailheader = "From: " . $name . " <" . $email . ">\r\n";
   $emailheader .= "Reply-To: " . $email . "\r\n";
   $emailheader .= "MIME-Version: 1.0\r\n";
-  $emailheader .= "Content-Type: text/html; charset=utf-8\r\n";
+  $emailheader .= "Content-Type: text/html; charset=utf-8\r\n"; // Change text/plain to text/html
   $emailheader .= "X-Mailer: PHP/" . phpversion();
 
   // Recipient email address
@@ -26,12 +26,12 @@
         padding: 20px;
         background-color: #f9f9f9;
         border-radius: 10px;
+        text-align: left;
       }
       .content {
-        direction: rtl;
-        text-align: right;
         font-family: Arial, sans-serif;
         line-height: 1.6;
+        text-align: left;
       }
       .message {
         padding: 10px;
@@ -43,13 +43,13 @@
   </head>
   <body>
     <div class="container">
-      <h2 style="text-align:right;">:تفاصيل الرسالة</h2>
+      <h2>Message Details:</h2>
       <div class="content">
-        <p><strong>الاسم:</strong> ' . $name . '</p>
-        <p><strong>البريد الالكتروني:</strong> ' . $email . '</p>
-        <p><strong>الموضوع:</strong> ' . $subject . '</p>
+        <p><strong>Name:</strong> ' . $name . '</p>
+        <p><strong>Email:</strong> ' . $email . '</p>
+        <p><strong>Subject:</strong> ' . $subject . '</p>
         <div class="message">
-          <p><strong>الرسالة:</strong></p>
+          <p><strong>Message:</strong></p>
           <p>' . $message . '</p>
         </div>
       </div>
@@ -58,18 +58,19 @@
   </html>
   ';
 
+
   // Email subject
   $email_subject = "Binaa Virtual School International";
 
   // Send email and handle success or failure
   if (mail($recipient, $email_subject, $body, $emailheader)) {
     echo '<script>
-    alert("تم إرسال البريد الإلكتروني بنجاح");
+    alert("Your Message Has Been Successfully Sent.");
     window.location.replace("Home");
     </script>';
   } else {
     echo '<script>
-    alert("عذرا، حدث خطأ أثناء إرسال رسالتك. الرجاء معاودة المحاولة في وقت لاحق.");
+    alert("Sorry, There Was an Error While Sending Your Message. Please Try Again Later.");
     window.location.replace("Home");
     </script>';
   }
